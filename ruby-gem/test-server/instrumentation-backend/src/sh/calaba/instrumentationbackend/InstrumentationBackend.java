@@ -1,5 +1,17 @@
 package sh.calaba.instrumentationbackend;
 
+import android.app.Instrumentation;
+import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+
+import com.jayway.android.robotium.solo.Solo;
+
+import sh.calaba.instrumentationbackend.actions.Actions;
+import sh.calaba.org.codehaus.jackson.JsonGenerationException;
+import sh.calaba.org.codehaus.jackson.map.DeserializationConfig.Feature;
+import sh.calaba.org.codehaus.jackson.map.JsonMappingException;
+import sh.calaba.org.codehaus.jackson.map.ObjectMapper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,21 +21,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
-
-import sh.calaba.instrumentationbackend.actions.Actions;
-import sh.calaba.org.codehaus.jackson.JsonGenerationException;
-import sh.calaba.org.codehaus.jackson.map.JsonMappingException;
-import sh.calaba.org.codehaus.jackson.map.ObjectMapper;
-import sh.calaba.org.codehaus.jackson.map.DeserializationConfig.Feature;
-import android.app.Instrumentation;
-import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-
-import com.jayway.android.robotium.solo.Solo;
-
 public class InstrumentationBackend extends ActivityInstrumentationTestCase2 {
     public static final String TARGET_PACKAGE = "#ACTIVITY_PACKAGE#"; //Set from Ant at compile time
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "#ACTIVITY_QUALIFIED_NAME#"; //Set from Ant at compile time
+    public static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "#ACTIVITY_QUALIFIED_NAME#"; //Set from Ant at compile time
     
     private static final String TAG = "IntrumentationBackend";
     
