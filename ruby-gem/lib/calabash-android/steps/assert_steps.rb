@@ -3,7 +3,13 @@ Then /^I see the text "([^\"]*)"$/ do |text|
 end
 
 Then /^I see "([^\"]*)"$/ do |text|
-  performAction('assert_text', text, true) 
+  performAction('assert_text', text, true)
+end
+
+Then /^I see$/ do |table|
+  table.raw.flatten.each do |text|
+    performAction('assert_text', text, true)
+  end
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
