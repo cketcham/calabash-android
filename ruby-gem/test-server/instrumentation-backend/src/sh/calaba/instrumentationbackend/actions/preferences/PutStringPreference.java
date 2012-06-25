@@ -1,22 +1,42 @@
+
 package sh.calaba.instrumentationbackend.actions.preferences;
 
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
-import sh.calaba.instrumentationbackend.InstrumentationBackend;
 import sh.calaba.instrumentationbackend.Result;
 import sh.calaba.instrumentationbackend.actions.Action;
+import sh.calaba.instrumentationbackend.actions.preferences.PutPreferenceAction.PutPreferenceActionCallback;
 
-public class PutStringPreference implements Action {
+/**
+ * Puts a string preference
+ * 
+ * @author cketcham
+ */
+public class PutStringPreference implements Action, PutPreferenceActionCallback<String> {
 
     @Override
     public Result execute(String... args) {
-        SharedPreferences prefs = InstrumentationBackend.instrumentation.getTargetContext().getSharedPreferences(args[0], Context.MODE_PRIVATE);
-		return prefs.edit().putString(args[1], args[2]).commit() ? Result.successResult() : new Result(false, "Preference not saved");
+        return new PutPreferenceAction<String>().execute(this, args);
     }
 
     @Override
     public String key() {
         return "put_string_preference";
+    }
+
+    @Override
+    public Editor put(Editor editor, String key, String value) {
+        return editor.putString(key, value);
+    }
+
+    @Override
+    public String get(SharedPreferences prefs, String key) {
+        return prefs.getString(key, null);
+    }
+
+    @Override
+    public String parse(String value) {
+        return value;
     }
 }

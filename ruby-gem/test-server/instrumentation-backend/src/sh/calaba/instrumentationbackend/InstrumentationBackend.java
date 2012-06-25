@@ -37,6 +37,12 @@ public class InstrumentationBackend extends ActivityInstrumentationTestCase2 {
     public static Solo solo;
     public static Actions actions;
     
+    /**
+     * Should be set true by actions which change the state of the activity
+     * such as setting a preference or changing the database
+     */
+    public static boolean activityStateChanged = false;
+
     private static Class getActivityClass() {
     	try {
 			return Class.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
